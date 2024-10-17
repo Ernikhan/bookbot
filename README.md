@@ -1,2 +1,3 @@
 # bookbot
-First developer proyect: Basic level (Python-Terminals and Shells-Git)
+
+BookBot is my first project!
