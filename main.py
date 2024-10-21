@@ -14,12 +14,15 @@ def main():
         print(f"    The {item["char"]} character was found {item["num"]} times")
     
     print("                 ------------------------------------                  ")
+    print("                 ----Top 20 words with 5+ letters----                  ")
+    print("                 ------------------------------------                  ")
+
 
     for word in top_words[0:21]:
         print(f"    The word '{word["word"]}' was repeated {word["num"]} times")
     
     print("=======================================================================")
-    print("             ---- End Report ----")
+    print("                     ---- End Report ----        ")
     
 
 
@@ -59,10 +62,11 @@ def words_events(text):
     words = text.split()
     words_dict = {}
     for word in words:
-        if word in words_dict:
-            words_dict[word] += 1
-        else:
-            words_dict[word] = 1
+        if len(word) >= 5:
+            if word in words_dict:
+                words_dict[word] += 1
+            else:
+                words_dict[word] = 1
     return words_dict
 
 # función que toma un diccionario de palabras y las veces que aparece y lo ordena de mayor a menor ocurrencia
