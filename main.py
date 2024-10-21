@@ -4,13 +4,22 @@ def main():
     num_words = count_words(text)
     num_chars = count_characters(text)
     sorted_list = sortdir_tolist(num_chars)
-    print(f"---- Report was generated for : {book_path} ----")
-    print(f"Number of words in the book: {num_words}")
+    words_intext = words_events(text)
+    top_words = sort_words(words_intext)
+    print("=======================================================================")
+    print(f"        ---- Report was generated for : {book_path} ----")
+    print(f"            Number of words in the book: {num_words}")
 
     for item in sorted_list:
-        print(f"The {item["char"]} character was found {item["num"]} times")
+        print(f"    The {item["char"]} character was found {item["num"]} times")
     
-    print("---- End Report ----")
+    print("                 ------------------------------------                  ")
+
+    for word in top_words[0:21]:
+        print(f"    The word '{word["word"]}' was repeated {word["num"]} times")
+    
+    print("=======================================================================")
+    print("             ---- End Report ----")
     
 
 
@@ -43,6 +52,27 @@ def sortdir_tolist(dicto):
         sorted_list.append({"char": character, "num": dicto[character]})
     sorted_list.sort(reverse=True, key=lambda dicto: dicto["num"])
     return sorted_list
+
+
+# función que toma el texto del libro, crea una lista de palabras y con ello crea una lista de diccionarios con cada palabra y el numero de ocurrencias para cada uno
+def words_events(text):
+    words = text.split()
+    words_dict = {}
+    for word in words:
+        if word in words_dict:
+            words_dict[word] += 1
+        else:
+            words_dict[word] = 1
+    return words_dict
+
+# función que toma un diccionario de palabras y las veces que aparece y lo ordena de mayor a menor ocurrencia
+def sort_words(wordslist):
+    sorted_words = []
+    for word in wordslist:
+        sorted_words.append({"word": word, "num": wordslist[word]})
+    sorted_words.sort(reverse=True, key=lambda wordslist: wordslist["num"])
+    return sorted_words
+
 
 
 main()
